@@ -2,12 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Change packaging to pom for aggregator project -->
     <groupId>com.wakaleo.gameoflife</groupId>
     <artifactId>gameoflife</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- Change the packaging to WAR -->
-    <packaging>war</packaging>
+    <!-- Packaging type should be 'pom' for an aggregator project -->
+    <packaging>pom</packaging>
 
     <name>gameoflife</name>
     <url>https://github.com/wakaleo/game-of-life</url>
@@ -51,7 +52,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven WAR Plugin to package the project as a WAR -->
+            <!-- Maven WAR Plugin to package the project as a WAR (in submodules, not in parent) -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.3</version>
