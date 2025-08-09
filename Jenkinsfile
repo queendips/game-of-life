@@ -1,10 +1,9 @@
 pipeline {
     agent any
 
-   
-    tools {
-        jdk 'corretto-1.8'
-        maven 'maven-3.9.11'
+    environment {
+        MAVEN_HOME = "/opt/maven"
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
     }
 
     stages {
