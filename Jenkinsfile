@@ -23,7 +23,6 @@ pipeline {
         stage('Publish Test Reports') {
             steps {
                 junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
-
             }
         }
 
@@ -35,15 +34,24 @@ pipeline {
     }
 
     post {
-        always {
-            echo 'Cleaning workspace...'
-            cleanWs()
-        }
         success {
-            echo '✅ Build succeeded!'
+            mail to: 'gauriqueen2625@gmail.com',
+                 subject: "✅ Build SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: """Good news!
+
+The Jenkins build for job *${env.JOB_NAME}* succeeded.
+
+Details: ${env.BUILD_URL}
+"""
         }
+
         failure {
-            echo '❌ Build failed!'
+            mail to: 'gauriqueen2625@gmail.com',
+                 subject: "❌ Build FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: """Unfortunately, the Jenkins build for job *${env.JOB_NAME}* has failed.
+
+Check console output: ${env.BUILD_URL}
+"""
         }
     }
 }
